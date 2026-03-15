@@ -1,4 +1,3 @@
-
 async function login() {
     
     let user = document.querySelector('input[name="user"]').value;
@@ -9,6 +8,9 @@ async function login() {
     let messageDOM = document.getElementById('message');
 
     try {
+        if (!password || !user) {
+            throw new Error('Password and Username is required')
+        }
         if (!user) {
             throw new Error('Username is required');
         }

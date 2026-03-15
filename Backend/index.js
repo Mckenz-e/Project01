@@ -126,10 +126,11 @@ app.put('/assets/:id', async (req, res) => {
     }
 });
 
-app.put('/return/:id', async (req, res) => {
+app.put('/assets/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        await conn.query('UPDATE assets SET status = "Available", user_id = NULL WHERE asset_id = ?', id);
+        const { user_id } = req.body;
+        await conn.query('UPDATE assets SET status = "Borrowed", user_id = ? WHERE asset_id = ?', [user_id, id]);
         res.json({ 
             message: 'Updated successfully' 
         });
@@ -137,6 +138,7 @@ app.put('/return/:id', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
 
 app.get('/assets', async (req, res) => {
     try {
@@ -146,8 +148,6 @@ app.get('/assets', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
-
 
 app.post('/assets',async (req, res) => {
     try{let assets = req.body;
@@ -173,9 +173,6 @@ app.post('/assets',async (req, res) => {
         });
     }
 })
-
-
-
 
 app.post('/register',async (req, res) => {
     try{let user = req.body;
@@ -203,8 +200,37 @@ app.post('/register',async (req, res) => {
 })
 
 
+app.get('/information', async (req, res) => {
+    try {
+        const [rows] = await conn.query('SELECT assets.*,IFNULL(users.user,"") AS user FROM assets LEFT JOIN users ON assets.user_id = users.user_id');
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 app.listen(port, async () => {
     await initMySQL();
     console.log(`Server running at http://localhost:${port}`);
 });
 
+app.put('/return/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        await conn.query('UPDATE assets SET status = "Available", user_id = NULL WHERE asset_id = ?', id);
+        res.json({ 
+            message: 'Updated successfully' 
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.get('/assets', async (req, res) => {
+    try {
+        const [rows] = await conn.query('SELECT * FROM assets ');
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});

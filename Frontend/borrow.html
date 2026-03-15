@@ -3,56 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        table{
-            border-collapse: collapse;
-            width: 80%;
-        }
-
-        th,td{
-            border:1px solid black;
-            padding:8px;
-            text-align:left;
-        }
-
-        th{
-            background:#eee;
-        }
-</style>
+    <title>Borrow Asset</title>
+    <link rel="stylesheet" href="style02.css">
 </head>
 <body>
-    <h2>Borrowing List</h2>
+    <button class="btn-logout" onclick="window.location.href='login.html'">ออกจากระบบ (Log out)</button>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="title-section">
+                <h1>ยืมครุภัณฑ์</h1>
+                <p class="subtitle">Borrow Asset</p>
+            </div>
+            <div class="action-buttons">
+                <a href="main.html" class="btn btn-primary">หน้าหลัก (Home)</a>
+                <a href="return.html" class="btn btn-secondary">คืนครุภัณฑ์ (Return)</a>
+                <a href="history.html" class="btn btn-outline">ข้อมูลการยืม (Status)</a>
+            </div>
+        </header>
 
-    <a href="main.html" class="btn-add">
-    <button>หน้าหนัก</button>
-    <a href="return.html" class="btn-add">
-    <button>คืนครุภัณท์</button>
-    <a href="history.html" class="btn-add">
-    <button>ข้อมูลการยืม</button>
-    </a>
+        <main class="dashboard-content">
+            <div class="table-header">
+                <h2>Borrowing List</h2>
+            </div>
+            
+            <div class="table-wrapper">
+                <table id="borrowTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Asset Code</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
 
-    <table id="borrowTable">
-    <thead>
-    <tr>
-    <th>ID</th>
-    <th>AssetCode</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Action</th>
-    </tr>
-    </thead>
-
-    <tbody>
-
-    </tbody>
-    <dialog id="confirmModal">
-        <p>Are you sure you want to borrow this product?</p>
-        <button id="cancelBtn">Cancel</button>
-        <button id="confirmBtn">Sure</button>
+    <dialog id="confirmModal" class="custom-dialog">
+        <div class="dialog-content">
+            <h3>ยืนยันการยืมครุภัณฑ์</h3>
+            <p>Are you sure you want to borrow this product?</p>
+            <div class="dialog-actions">
+                <button id="cancelBtn" class="btn btn-outline" onclick="document.getElementById('confirmModal').close()">Cancel</button>
+                <button id="confirmBtn" class="btn btn-primary">Sure</button>
+            </div>
+        </div>
     </dialog>
+
     <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
     <script src="borrow.js"></script>
 </body>
