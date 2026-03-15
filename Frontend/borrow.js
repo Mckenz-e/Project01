@@ -30,7 +30,8 @@ async function loadBorrow(){
     function clicked(id) {
         modal.showModal();
         confirmBtn.addEventListener('click', async () => {
-            const response = await axios.put(`http://localhost:8000/assets/${id}`);
+            const user_id = localStorage.getItem("user_id");
+            const response = await axios.put(`http://localhost:8000/assets/${id}`, { user_id });
             window.location.reload(); 
         });
         cancelBtn.addEventListener('click', () => {

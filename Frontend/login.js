@@ -20,9 +20,13 @@ async function login() {
             user: user,
             password: password
         });
+        
+        localStorage.setItem("user_id",response.data.user_id);
 
         console.log('response:', response);
-        console.log('role', response.data.isAdmin)
+        console.log('user_id', response.data.user_id);
+
+
        if (response.data.status == "ok") {
             if (response.data.isAdmin) {
                 window.location.href = 'admin.html';

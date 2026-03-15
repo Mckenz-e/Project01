@@ -8,7 +8,8 @@ const cors = require('cors');
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../Frontend/Pages/login')));
+
+app.use(express.static(path.join(__dirname, '../Frontend')));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../Frontend/login.html'));
@@ -68,15 +69,16 @@ app.post('/login', async (req, res) => {
         const [rows] = await db.query(
             'SELECT * FROM users WHERE user = ? AND password = ?', [user, password]
         );
-
+        
         if (rows.length > 0) {
             const userRow = rows[0];
             console.log('userRow:', userRow); 
             const isAdmin = userRow.role == 1;
-
+            const user_id = rows[0].user_id;
             res.json({
                 status: "ok",
-                isAdmin: isAdmin 
+                isAdmin: isAdmin,
+                user_id: user_id
             });
         } else {
             res.json({
@@ -102,7 +104,9 @@ app.get('/borrow', async (req, res) => {
 
 app.get('/return', async (req, res) => {
     try {
-        const [rows] = await conn.query('SELECT * FROM assets WHERE status = "Borrowed"');
+        const user_id = req.query.user_id;
+        const user = req.query.user;
+        const [rows] = await conn.query('SELECT * FROM assets WHERE status = "Borrowed" AND user_id = ?',user_id);
         res.json(rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -112,7 +116,20 @@ app.get('/return', async (req, res) => {
 app.put('/assets/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        await conn.query('UPDATE assets SET status = "Borrowed" WHERE asset_id = ?', id);
+        const { user_id } = req.body;
+        await conn.query('UPDATE assets SET status = "Borrowed", user_id = ? WHERE asset_id = ?', [user_id, id]);
+        res.json({ 
+            message: 'Updated successfully' 
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.put('/return/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        await conn.query('UPDATE assets SET status = "Available", user_id = NULL WHERE asset_id = ?', id);
         res.json({ 
             message: 'Updated successfully' 
         });

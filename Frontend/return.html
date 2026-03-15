@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         table{
             border-collapse: collapse;
@@ -22,7 +23,15 @@
 </style>
 </head>
 <body>
-    <h2>Borrowing List</h2>
+    <h2>Return List</h2>
+
+    <a href="main.html" class="btn-add">
+    <button>หน้าหนัก</button>
+    <a href="borrow.html" class="btn-add">
+    <button>ยืมครุภัณท์</button>
+    <a href="history.html" class="btn-add">
+    <button>ข้อมูลการยืม</button>
+    </a>
 
     <table id="borrowTable">
     <thead>
@@ -40,11 +49,11 @@
 
     </tbody>
     <dialog id="confirmModal">
-        <p>Are you sure you want to proceed?</p>
+        <p>Are you sure you want to return this product?</p>
         <button id="cancelBtn">No, go back</button>
         <button id="confirmBtn">Yes, I'm sure</button>
     </dialog>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
-    <script src="borrow.js"></script>
+    <script src="return.js"></script>
 </body>
 </html>
