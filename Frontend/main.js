@@ -1,5 +1,5 @@
 async function loadAssets(){
-        const response = await fetch("http://localhost:8000/assets");
+        const response = await fetch("http://localhost:8000/main");
         const data = await response.json();
 
         const table = document.querySelector("#assetTable tbody");
@@ -12,6 +12,7 @@ async function loadAssets(){
                 <td><span class="badge">${asset.asset_code}</span></td>
                 <td>${asset.asset_name}</td>
                 <td class="desc">${asset.description}</td>
+                <td>${asset.category_name}</td>
                 <td class="price">฿${asset.price}</td>
             </tr>
             `;

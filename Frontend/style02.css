@@ -87,6 +87,19 @@ body {
     transform: translateY(-1px);
 }
 
+.btn-delete {
+    background-color: #da4848;
+    color: rgb(255, 248, 248);
+    box-shadow: 0 4px 6px rgba(46, 5, 5, 0.2);
+}
+
+.btn-delete:hover {
+    background-color: #b12323;
+    transform: translateY(-1px);
+}
+
+
+
 .btn-secondary {
     background-color: #10b981;
     color: white;
@@ -286,6 +299,25 @@ tbody tr:last-child td {
     box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
 }
 
+.btn-edit {
+    background-color: #eff6ff;
+    color: #3b82f6; 
+    border: 1px solid #bfdbfe;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.btn-edit:hover {
+    background-color: #dbeafe;
+    border-color: #3b82f6;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+}
+
 .btn-action {
     background-color: #f8fafc;
     color: #475569;
@@ -333,4 +365,23 @@ tbody tr:last-child td {
     background-color: #b60707;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15);
+}
+
+.btn-edit {
+    background-color: #eff6ff;
+    color: #3b82f6; 
+    border: 1px solid #bfdbfe;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.btn-edit:hover {
+    background-color: #dbeafe;
+    border-color: #3b82f6;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
 }

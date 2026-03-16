@@ -6,6 +6,8 @@ const app = express();
 const port = 8000;
 const cors = require('cors');
 
+const join_user_status = 'SELECT assets.*,IFNULL (users.user,"") AS user, IFNULL(status.status_name, "") AS status FROM assets  LEFT JOIN users ON assets.user_id = users.user_id LEFT JOIN status ON assets.status_id = status.status_id';
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -95,7 +97,7 @@ app.post('/login', async (req, res) => {
 
 app.get('/borrow', async (req, res) => {
     try {
-        const [rows] = await conn.query('SELECT * FROM assets WHERE status = "Available"');
+        const [rows] = await conn.query('SELECT * FROM assets WHERE status_id = 1');
         res.json(rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -106,7 +108,7 @@ app.get('/return', async (req, res) => {
     try {
         const user_id = req.query.user_id;
         const user = req.query.user;
-        const [rows] = await conn.query('SELECT * FROM assets WHERE status = "Borrowed" AND user_id = ?',user_id);
+        const [rows] = await conn.query('SELECT * FROM assets WHERE status_id = 0 AND user_id = ?',user_id);
         res.json(rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -117,20 +119,7 @@ app.put('/assets/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const { user_id } = req.body;
-        await conn.query('UPDATE assets SET status = "Borrowed", user_id = ? WHERE asset_id = ?', [user_id, id]);
-        res.json({ 
-            message: 'Updated successfully' 
-        });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-app.put('/assets/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const { user_id } = req.body;
-        await conn.query('UPDATE assets SET status = "Borrowed", user_id = ? WHERE asset_id = ?', [user_id, id]);
+        await conn.query('UPDATE assets SET status_id = 0 , user_id = ? WHERE asset_id = ?', [user_id, id]);
         res.json({ 
             message: 'Updated successfully' 
         });
@@ -143,6 +132,15 @@ app.put('/assets/:id', async (req, res) => {
 app.get('/assets', async (req, res) => {
     try {
         const [rows] = await conn.query('SELECT * FROM assets ');
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.get('/main', async (req, res) => {
+    try {
+        const [rows] = await conn.query('SELECT assets.*, categories.category_name FROM assets LEFT JOIN categories ON assets.category_id = categories.category_id');
         res.json(rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -202,22 +200,17 @@ app.post('/register',async (req, res) => {
 
 app.get('/information', async (req, res) => {
     try {
-        const [rows] = await conn.query('SELECT assets.*,IFNULL(users.user,"") AS user FROM assets LEFT JOIN users ON assets.user_id = users.user_id');
+        const [rows] = await conn.query(join_user_status);
         res.json(rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
-app.listen(port, async () => {
-    await initMySQL();
-    console.log(`Server running at http://localhost:${port}`);
-});
-
 app.put('/return/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        await conn.query('UPDATE assets SET status = "Available", user_id = NULL WHERE asset_id = ?', id);
+        await conn.query('UPDATE assets SET status_id = 1, user_id = NULL WHERE asset_id = ?', id);
         res.json({ 
             message: 'Updated successfully' 
         });
@@ -226,11 +219,52 @@ app.put('/return/:id', async (req, res) => {
     }
 });
 
-app.get('/assets', async (req, res) => {
-    try {
-        const [rows] = await conn.query('SELECT * FROM assets ');
-        res.json(rows);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+app.delete('/assets/:id', async (req, res) => {
+    try {        const id = req.params.id;
+        await conn.query('DELETE FROM assets WHERE asset_id = ?', id);
+        res.json({ 
+            message: 'Deleted successfully' 
+        });
+    }   catch (err) {               
+        res.status(500).json({ error: err.message });       
     }
+});
+
+app.get("/assets/:id", async (req,res)=>{
+    const id = req.params.id;
+    const [rows] = await conn.query("SELECT * FROM assets WHERE asset_id = ?", [id]);
+    res.json(rows[0])
+})
+
+app.put('/edit/:id', async (req, res) => {
+    try {
+        let id = req.params.id;
+        let updateAsset = req.body;
+        const errors = validateAssets(updateAsset);
+        if (errors.length > 0){
+            throw {
+                message: 'กรุณากรอกให้ครบ',
+                errors: errors,
+                statusCode: 400
+            }
+        }
+        const results = await conn.query('UPDATE assets SET ? WHERE asset_id = ?', [updateAsset, id]);
+        res.json({
+            message: 'Asset updated successfully',
+            data: results[0]
+        });
+    } catch (error) {
+        console.error(error);
+        const errormessage = error.message || 'Error updating asset';
+        const statusCode = error.statusCode || 500;
+        res.status(statusCode).json({
+            message: errormessage,
+            errors: error.errors || []
+        });
+    }
+})
+
+app.listen(port, async () => {
+    await initMySQL();
+    console.log(`Server running at http://localhost:${port}`);
 });

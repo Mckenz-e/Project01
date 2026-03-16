@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borrow Asset</title>
+    <title>Delete Asset</title>
     <link rel="stylesheet" href="style02.css">
 </head>
 <body>
@@ -11,19 +11,17 @@
     <div class="dashboard-container">
         <header class="dashboard-header">
             <div class="title-section">
-                <h1>ยืมครุภัณฑ์</h1>
-                <p class="subtitle">Borrow Asset</p>
+                <h1>จัดการครุภัณฑ์</h1>
+                <p class="subtitle">Manage Asset</p>
             </div>
             <div class="action-buttons">
-                <a href="main.html" class="btn btn-primary">หน้าหลัก (Home)</a>
-                <a href="return.html" class="btn btn-secondary">คืนครุภัณฑ์ (Return)</a>
-                <a href="history.html" class="btn btn-outline">ข้อมูลการยืม (Status)</a>
+                <a href="admin.html" class="btn btn-primary">เพิ่มครุภัณฑ์ (Add assets)</a>
             </div>
         </header>
 
         <main class="dashboard-content">
             <div class="table-header">
-                <h2>Borrowing List</h2>
+                <h2>Assets List</h2>
             </div>
             
             <div class="table-wrapper">
@@ -48,15 +46,16 @@
     <dialog id="confirmModal" class="custom-dialog">
         <div class="dialog-content">
             <h3>ยืนยันการยืมครุภัณฑ์</h3>
-            <p>Are you sure you want to borrow this product?</p>
+            <p>Do you want to edit or delete?</p>
             <div class="dialog-actions">
                 <button id="cancelBtn" class="btn btn-outline" onclick="document.getElementById('confirmModal').close()">Cancel</button>
-                <button id="confirmBtn" class="btn btn-edit">Sure</button>
+                <button id="deleteBtn" class="btn btn-delete">Delete</button>
+                <button id="editBtn" class="btn-edit">Edit</button>
             </div>
         </div>
     </dialog>
 
     <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
-    <script src="borrow.js"></script>
+    <script src="manage.js"></script>
 </body>
 </html>

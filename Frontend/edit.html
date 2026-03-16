@@ -14,38 +14,38 @@
     <button class="btn-logout" onclick="window.location.href='login.html'">ออกจากระบบ (Log out)</button>
     <div class="container">
         <div class="header">
-            Add assets
+            Edit assets
         </div>
         <div class="manage-buttons">
             <a href="manage.html" class="btn btn-primary">manage menu</a>
         </div>
         <div class="flex form-input">
             <div class="header-form">asset_code</div>
-            <input class="form" name="asset_code" type="text">
+            <input class="form" id="asset_code" type="text">
         </div>
         <div class="flex form-input">
             <div class="header-form">asset_name</div>
-            <input class="form" name="asset_name" type="text">
+            <input class="form" id="asset_name" type="text">
         </div>
         <div class="flex form-input">
             <div class="header-form">category_id</div>
-            <input class="form" name="category_id" type="text">
+            <input class="form" id="category_id" type="text">
         </div>
         <div class="flex form-input">
             <div class="header-form">price</div>
-            <input class="form" name="price" type="text">
+            <input class="form" id="price" type="text">
         </div>
         <div class="flex form-input">
             <div class="header-form">description</div>
-            <input class="form" name="description" type="text">
+            <input class="form" id="description" type="text">
         </div>
         <div id="message" class="message"></div>
         <div class="center">
-            <button onclick="submitData()" class="button">ส่งข้อมูล</button>
+            <button onclick="updateAsset()" class="button">Edit</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
-    <script src="admin.js"></script>
+    <script src="edit.js"></script>
 </body>
 
 </html>
