@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+</head>
+
+<body>
+    <button class="btn-logout" onclick="window.location.href='login.html'">ออกจากระบบ (Log out)</button>
+    <div class="container">
+        <div class="header">
+            Add assets
+        </div>
+        <div class="manage-buttons">
+            <a href="manage.html" class="btn btn-primary">manage menu</a>
+        </div>
+        <div class="flex form-input">
+            <div class="header-form">asset_code</div>
+            <input class="form" name="asset_code" type="text">
+        </div>
+        <div class="flex form-input">
+            <div class="header-form">asset_name</div>
+            <input class="form" name="asset_name" type="text">
+        </div>
+        <div class="flex form-input">
+            <div class="header-form">category_id</div>
+            <input class="form" name="category_id" type="text">
+        </div>
+        <div class="flex form-input">
+            <div class="header-form">price</div>
+            <input class="form" name="price" type="text">
+        </div>
+        <div class="flex form-input">
+            <div class="header-form">description</div>
+            <input class="form" name="description" type="text">
+        </div>
+        <div id="message" class="message"></div>
+        <div class="center">
+            <button onclick="submitData()" class="button">ส่งข้อมูล</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="js/app.js" type="module"></script>
+    <script src="js/pages/admin.js" type="module"></script>
+</body>
+
+</html>

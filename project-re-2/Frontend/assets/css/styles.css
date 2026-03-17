@@ -1,0 +1,161 @@
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url("bg3.png");
+    background-size: cover;
+    background-position: center;
+    
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.5);
+    z-index: -1;
+}
+
+.container{
+    width: 400px;
+    padding: 65px;
+    text-align: center;
+    background-color: white; 
+    border-radius: 10px;      
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    position: relative;
+}
+
+.header{
+    font-size: 26px;
+    font-weight: bold;
+    color: #2f80ed;
+    margin-bottom: 10px;
+}
+
+.text{
+    font-size: 20px;
+    font-weight: bold;
+    color: #626872;
+    margin-bottom: 30px;
+}
+
+
+.form-input{
+    margin-bottom: 16px;
+}
+
+
+.form{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+
+.button{
+    background-color: #2f80ed;
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: #1c6ed5;
+}
+
+.manage-buttons{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+
+.manage-buttons a{
+    background-color: #2897e0;   
+    color: white;
+    padding: 10px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.manage-buttons a:hover{
+    background-color: #273cb1; 
+}
+
+
+.center{
+    margin-top: 30px;
+}
+
+.message {
+    background-color: #007bff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    display: none;
+}
+
+.message.success {
+    background-color: #5bdd77;
+    display: block;
+}
+
+.message.danger{
+    background-color: #e76969;
+    display: block;
+}
+
+.message.noUserOrPassword{
+    background-color: #e92020;
+    display: block;
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    color: white;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+}
+
+.btn-logout {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background-color: #e22727;
+    color: #ffffff; 
+    border: 1px solid #ee0a0a;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    z-index: 100; 
+}
+
+.btn-logout:hover {
+    background-color: #b60707;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15);
+}

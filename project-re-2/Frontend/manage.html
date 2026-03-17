@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Asset</title>
+    <link rel="stylesheet" href="assets/css/style02.css">
+</head>
+<body>
+    <button class="btn-logout" onclick="window.location.href='login.html'">ออกจากระบบ (Log out)</button>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="title-section">
+                <h1>จัดการครุภัณฑ์</h1>
+                <p class="subtitle">Manage Asset</p>
+            </div>
+            <div class="action-buttons">
+                <a href="admin.html" class="btn btn-primary">เพิ่มครุภัณฑ์ (Add assets)</a>
+            </div>
+        </header>
+
+        <main class="dashboard-content">
+            <div class="table-header">
+                <h2>Assets List</h2>
+            </div>
+            
+            <div class="table-wrapper">
+                <table id="borrowTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Asset Code</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <dialog id="confirmModal" class="custom-dialog">
+        <div class="dialog-content">
+            <h3>ยืนยันการยืมครุภัณฑ์</h3>
+            <p>Do you want to edit or delete?</p>
+            <div class="dialog-actions">
+                <button id="cancelBtn" class="btn btn-outline" onclick="document.getElementById('confirmModal').close()">Cancel</button>
+                <button id="deleteBtn" class="btn btn-delete">Delete</button>
+                <button id="editBtn" class="btn-edit">Edit</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="js/app.js" type="module"></script>
+    <script src="js/pages/manage.js" type="module"></script>
+</body>
+</html>
