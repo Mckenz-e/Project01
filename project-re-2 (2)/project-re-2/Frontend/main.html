@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style02.css">
+
+</head>
+<body>
+    <button class="btn-logout" onclick="window.location.href='login.html'">ออกจากระบบ (Log out)</button>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="title-section">
+                <h1>ระบบจัดการครุภัณฑ์</h1>
+                <p class="subtitle">Asset Management System</p>
+            </div>
+            <div class="action-buttons">
+                <a href="borrow.html" class="btn btn-primary">ยืมครุภัณฑ์ (Borrow)</a>
+                <a href="return.html" class="btn btn-secondary">คืนครุภัณฑ์ (Return)</a>
+                <a href="information.html" class="btn btn-outline">ข้อมูลการยืม (Status)</a>
+            </div>
+        </header>
+
+        <main class="dashboard-content">
+            <div class="table-header">
+                <h2>Asset List</h2>
+            </div>
+            
+            <div class="table-wrapper">
+                <table id="assetTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="js/app.js" type="module"></script>
+    <script src="js/pages/main.js" type="module"></script>
+</body>
+</html>

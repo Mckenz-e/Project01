@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowing History</title>
+    <link rel="stylesheet" href="assets/css/style02.css">
+</head>
+<body>
+    <button class="btn-logout" onclick="window.location.href='login.html'">ออกจากระบบ (Log out)</button>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="title-section">
+                <h1>ข้อมูลการยืม</h1>
+                <p class="subtitle">Borrowing History</p>
+            </div>
+            <div class="action-buttons">
+                <a href="main.html" class="btn btn-primary">หน้าหลัก (Home)</a>
+                <a href="borrow.html" class="btn btn-secondary">ยืมครุภัณฑ์ (Borrow)</a>
+                <a href="return.html" class="btn btn-outline">คืนครุภัณฑ์ (Return)</a>
+                <button onclick="exportPDF()">Export PDF</button>
+            </div>
+        </header>
+
+        <main class="dashboard-content">
+            <div id="report">
+                <div class="table-header">
+                <h2>Status List</h2>
+                </div>
+            
+                <div class="table-wrapper">
+                    <table id="informationTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Asset Code</th>
+                                <th>Asset Name</th>
+                                <th>Username</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <dialog id="confirmModal" class="custom-dialog">
+        <div class="dialog-content">
+            <h3>ยืนยันการดำเนินการ</h3>
+            <p>Are you sure you want to perform this action?</p>
+            <div class="dialog-actions">
+                <button id="cancelBtn" class="btn btn-outline" onclick="document.getElementById('confirmModal').close()">Cancel</button>
+                <button id="confirmBtn" class="btn btn-primary">Sure</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="js/app.js" type="module"></script>
+    <script src="js/pages/information.js" type="module"></script>
+</body>
+</html>
